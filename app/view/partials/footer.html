@@ -1,30 +1,23 @@
-<!--footer-->
 <footer class="footer">
   <div class="container">
     <div class="row">
       <div class="col-lg-3 col-md-3">
         <ul class="list-unstyled clear-margins">
         	<li class="widget-container widget_nav_menu">
-            <h1 class="title-widget">Useful links</h1>
-            <ul>
-            	<li><a  href="#"><i class="fa fa-angle-double-right"></i> About Us</a></li>
-                <li><a  href="#"><i class="fa fa-angle-double-right"></i> Contact Us</a></li>
-                <li><a  href="#"><i class="fa fa-angle-double-right"></i> Success Stories</a></li>
-                <li><a  href="#"><i class="fa fa-angle-double-right"></i> PG Courses</a></li>
-            </ul>
+            <h1 class="title-widget"> {{ labelAbout }}</h1>
+            <p>
+              {{ contentAbout }}
+            </p>
           </li>
         </ul>
       </div>
       <div class="col-lg-3 col-md-3"><!-- widgets column left -->
         <ul class="list-unstyled clear-margins"><!-- widgets -->
           <li class="widget-container widget_nav_menu"><!-- widgets list -->
-            <h1 class="title-widget">Useful links</h1>
-            <ul>
-              <li><a  href="#"><i class="fa fa-angle-double-right"></i>  Test Series Schedule</a></li>
-              <li><a  href="#"><i class="fa fa-angle-double-right"></i>  Postal Coaching</a></li>
-              <li><a  href="#"><i class="fa fa-angle-double-right"></i>  PG Dr. Bhatia Books</a></li>
-              <li><a  href="#"><i class="fa fa-angle-double-right"></i>  UG Courses</a></li>
-            </ul>
+            <h1 class="title-widget"> {{ labelCustomerServices }} </h1>
+            <p>
+              {{ contentCustomerServices }}
+            </p>
           </li>
         </ul>
       </div><!-- widgets column left end -->
@@ -32,13 +25,10 @@
       <div class="col-lg-3 col-md-3"><!-- widgets column left -->
         <ul class="list-unstyled clear-margins"><!-- widgets -->
           <li class="widget-container widget_nav_menu"><!-- widgets list -->
-            <h1 class="title-widget">Useful links</h1>
-            <ul>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> Enquiry Form</a></li>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> Online Test Series</a></li>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> Grand Tests Series</a></li>
-              <li><a href="#"><i class="fa fa-angle-double-right"></i> Subject Wise Test Series</a></li>
-            </ul>
+            <h1 class="title-widget"> {{ labelHumanResource }} </h1>
+            <p>
+              {{ contentHumanResource }}
+            </p>
           </li>
         </ul>
       </div><!-- widgets column left end -->
@@ -46,11 +36,10 @@
       <div class="col-lg-3 col-md-3"><!-- widgets column center -->
         <ul class="list-unstyled clear-margins"><!-- widgets -->
           <li class="widget-container widget_recent_news"><!-- widgets list -->
-            <h1 class="title-widget">Contact Detail </h1>
+            <h1 class="title-widget"> {{ labelContact }} </h1>
             <div class="footerp"> 
-              <h2 class="title-median">Webenlance Pvt. Ltd.</h2>
-              <p><b>Email id:</b> <a href="mailto:dungnv.itdn@gmail.com">dungnv.itdn@gmail.com</a></p>
-              <p><b>Phone Numbers : </b>0986.605.612 </p>
+              <p><b>{{ labelEmail }} : </b> <a href="mailto:dungnv.itdn@gmail.com">dungnv.itdn@gmail.com</a></p>
+              <p><b>{{ labelPhone }} : </b>0986.605.612 </p>
             </div>
             <div class="social-icons">
               <ul class="nomargin">
@@ -74,12 +63,12 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 				<div class="copyright">
-					© 2015, Webenlance, All rights reserved
+					{{ labelLicense }}
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 				<div class="design">
-				  <a href="#">Franchisee </a> |  <a target="_blank" href="http://www.webenlance.com">Web Design & Development by Webenlance</a>
+				  <a href="#"> {{labelAuthor }} </a> |  <a target="_blank" href="http://www.webenlance.com">{{ labelCarrer }}</a>
 				</div>
 			</div>
 		</div>

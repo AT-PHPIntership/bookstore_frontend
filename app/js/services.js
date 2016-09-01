@@ -2,30 +2,22 @@
 
 var shareServices = angular.module('shareServices', []);
 
-shareServices.service('myHttp', ['$http', '$q', '$localStorage', function ($http, $q, $localStorage) {
-  this.index = function (url) {
-    var deferred = $q.defer();
-    return $http.get(url)
-      .success(function (data) {
-        deferred.resolve(data); // declare that has been solved
-      })
-      .error(function (data) {
-        deferred.reject(data);
+shareServices.factory('ArticleService', ['$resource', '$localStorage', 'urlArticle', function ($resource, $localStorage, urlArticle) {
+    return $resource(urlArticle, 
+      {
+        article: "@article"
       }
     );
-  }
 }]);
 
-shareServices.service('AuthenticationService', ['$http', '$q', '$localStorage', '$location', function ($http, $q, $localStorage, $location) {
-  this.login = function (email, password, url) {
+shareServices.service('AuthenticationService', ['$http', '$q', '$localStorage', '$location', '$rootScope', function ($http, $q, $localStorage, $location, $rootScope) {
+  this.login = function (email, password, urlAuthentication) {
     var deferred = $q.defer();
-    return $http.post(url, { email: email, password: password })
+    return $http.post(urlAuthentication, { email: email, password: password })
       .success(function (response) {
         if (response.token) {
             // store username and token in local storage to keep user logged in between page refreshes
             $localStorage.currentUser = { email: email, token: response.token };
-            // add jwt token to auth header for all requests made by the $http service
-            $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
         }
         deferred.resolve(response);
       })
@@ -34,35 +26,21 @@ shareServices.service('AuthenticationService', ['$http', '$q', '$localStorage', 
       }
     );
   }
+}]);
+
+shareServices.service('UserService', ['$localStorage', '$location', function ($localStorage, $location) {
   this.logout = function () {
     delete $localStorage.currentUser;
-    $http.defaults.headers.common.Authorization = '';
     $location.path('/login');
   }
-}]);
-
-shareServices.service('checkLogin', ['$localStorage', '$location', function ($localStorage, $location) {
   this.isLoggedIn = function () {
-    if(!$localStorage.currentUser) {
-      $location.path('/index');
+    if($localStorage.currentUser) {
+      return true;
+    } else {
+      return false;
     }
   }
+  this.getEmail = function () {
+    return $localStorage.currentUser ? $localStorage.currentUser.email : 'default';
+  }
 }]);
-
-shareServices.factory('ArticleService', ['$resource', '$localStorage', function ($resource, $localStorage) {
-    return $resource('http://bookstore.me/api/articles/:article', 
-      {
-        article: "@article"
-      },
-      {
-        query: {
-          method: "GET",
-          isArray: true,
-          headers: {
-            "Authorization": $localStorage.currentUser.token
-          }
-        }
-      }
-    );
-}])
-;

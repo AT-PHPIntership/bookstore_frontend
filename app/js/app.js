@@ -1,19 +1,18 @@
 'use strict';
 
-// Declare our `templateApp` and its depends.
 var bookApp = angular.module('bookApp', [
   'bookControllers',
   'shareServices',
   'satellizer',
   'ui.router',
   'ngStorage',
-  'ngResource'
+  'ngResource',
+  'languageService'
 ]);
-
 bookApp.config(['$stateProvider', '$urlRouterProvider', '$authProvider', '$httpProvider', 
   function ($stateProvider, $urlRouterProvider, $authProvider, $httpProvider) {
     $stateProvider
-      .state('login', { // declare a state
+      .state('login', {
           url: '/login',
           templateUrl: 'view/login.html',
           controller: 'LoginController'
@@ -24,11 +23,6 @@ bookApp.config(['$stateProvider', '$urlRouterProvider', '$authProvider', '$httpP
           controller: 'HomeController'
       })
       .state('about', {
-          resolve: {
-            "check" : function (checkLogin) {
-              checkLogin.isLoggedIn();
-            }
-          },
           url: '/about',
           templateUrl: 'view/about.html',
           controller: 'AboutController'
@@ -47,3 +41,7 @@ bookApp.config(['$stateProvider', '$urlRouterProvider', '$authProvider', '$httpP
     $urlRouterProvider.otherwise('/login');
   }
 ]);
+var urlBase = 'http://bookstore.me';
+bookApp.constant("urlArticle", urlBase+ '/api/article/:article');
+bookApp.constant("urlAuthentication", urlBase+ '/api/authenticate');
+bookApp.constant("urlENCommon", 'view/lang/en/common.json');

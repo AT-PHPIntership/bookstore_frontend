@@ -1,10 +1,6 @@
-<div>
-  <h1>About view</h1>
-  <code>{{template}}</code>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, aliquid, officiis! Voluptatibus velit quo dignissimos voluptates debitis nam distinctio quis nulla, nisi incidunt, dolor esse dolores ab ullam delectus, quae?</p>
-  <p>
-    <div ng-repeat="x in data">
-      <!-- {{ x.id }} <br> -->
-    </div>
-  </p>
+<div ng-include="" src="'view/partials/guestHeader.html'" ng-show="!isLoggedIn"></div>
+<div ng-include="" src="'view/partials/userHeader.html'" ng-show="isLoggedIn"></div>
+<div class="container">
+  <div>
+  </div>
 </div>
