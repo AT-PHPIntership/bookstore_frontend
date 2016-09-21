@@ -55,6 +55,7 @@ bookApp.config(['$stateProvider', '$urlRouterProvider', '$authProvider', '$httpP
   }
 ]);
 var urlBase = 'http://bookstore.me';
+bookApp.constant("urlUploads", 'http://bookstore.me/uploads');
 bookApp.constant("urlCategoryDetail", urlBase+ '/api/categoryDetail/:categoryDetail');
 bookApp.constant("urlCity", urlBase+ '/api/city/:city');
 bookApp.constant("urlArticleCreate", urlBase+ '/api/article');

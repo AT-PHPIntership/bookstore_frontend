@@ -1,136 +1,130 @@
 <div ng-include="" src="'view/partials/guestHeader.html'" ng-show="!isLoggedIn"></div>
 <div ng-include="" src="'view/partials/userHeader.html'" ng-show="isLoggedIn"></div>
 <div class="container">
-    <div class="row thumbnail padding-10" id="articleShowContentBox">
-      <form name="createArticleForm" class="form-horizontal form-label-left" ng-submit="submit(createArticleForm.$valid)" novalidate>
-        <div class="form-group margin-bottom-5">
-          <label class="col-md-3 col-sm-3 col-xs-12">{{ labelContactInfo }}</label>
+  <div class="row thumbnail padding-10" id="articleShowContentBox">
+    <form name="createArticleForm" class="form-horizontal form-label-left" novalidate>
+      <div class="form-group margin-bottom-5">
+        <label class="col-md-3 col-sm-3 col-xs-12">{{ labelContactInfo }}</label>
+      </div>
+      <hr class="margin-top-5">
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ labelName }} :</label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <input type="text" ng-model="name" class="form-control col-md-7 col-xs-12" disabled>
         </div>
-        <hr class="margin-top-5">
-        <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ labelName }}</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" ng-model="name" required="required" class="form-control col-md-7 col-xs-12" disabled>
+      </div>
+      <div class="form-group">
+          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelEmail}} :</label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <input type="text" ng-model="email" name="last-name" class="form-control col-md-7 col-xs-12" disabled>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelPhone}} :</label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <input ng-model="phone" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" disabled>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelAddress}} :
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <input ng-model="address" class="form-control col-md-7 col-xs-12" type="text" disabled>
+        </div>
+      </div>
+      <div class="form-group margin-bottom-5">
+        <label class="col-md-3 col-sm-3 col-xs-12">{{labelContentArticle}}</label>
+      </div>
+      <hr class="margin-top-5">
+      <div class="form-group" ng-class="{ 'has-error' : createArticleForm.category_detail_id.$invalid && !createArticleForm.category_detail_id.$pristine }">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelCategory}} <span class="required">*</span></label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <select class="form-control" ng-model="data.category_detail_id" name="category_detail_id" ng-options="categoryDetail.name group by categoryDetail.category.name for categoryDetail in categoryDetails track by categoryDetail.id" required>
+          </select>
+          <span ng-show="createArticleForm.category_detail_id.$dirty && createArticleForm.category_detail_id.$error.required" class="help-block">{{labelCategory}} {{required}}</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelCity}} <span class="required">*</span></label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <select class="form-control" name="city_id" ng-model="data.city_id" ng-options="city.name for city in cities track by city.id" ng-required="true">
+          </select>
+          <span ng-show="createArticleForm.city_id.$dirty && createArticleForm.city_id.$error.required" class="help-block">{{labelCity}} {{required}}</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelType}} <span class="required">*</span></label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="radio">
+            <input type="radio" ng-model="data.type" value="sell" id="radioSellCreateArticle" class="radioButtonCreateArticle" />
+            <label for="radioSellCreateArticle" class="radioLabelCreateArticle">{{labelSell}}</label>
+            <input type="radio" ng-model="data.type" value="buy" id="radioBuyCreateArticle" class="radioButtonCreateArticle" />
+            <label for="radioBuyCreateArticle" class="radioLabelCreateArticle">{{labelBuy}}</label>
           </div>
         </div>
-        <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelEmail}}</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <input type="text" ng-model="email" name="last-name" required="required" class="form-control col-md-7 col-xs-12" disabled>
-          </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error' : createArticleForm.title.$invalid && !createArticleForm.title.$pristine}">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelTitle}} <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <input ng-model="data.title" name="title" class="date-picker form-control col-md-7 col-xs-12" ng-required="true" type="text" ng-minlength="3" ng-maxlength="256">
+          <span class="help-block" ng-show="createArticleForm.title.$dirty && createArticleForm.title.$error.required">{{labelTitle}} {{required}}</span>
+          <span class="help-block" ng-show="createArticleForm.title.$error.minlength">{{labelTitle}} {{minLength}}</span>
+          <span class="help-block" ng-show="createArticleForm.title.$error.maxlength">{{labelTitle}} {{maxLength}}</span>
         </div>
-        <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelPhone}}</label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <input ng-model="phone" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" disabled>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelAddress}}
-          </label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <input ng-model="address" class="form-control col-md-7 col-xs-12" required="required" type="text" disabled>
-          </div>
-        </div>
-        
-        
-        <div class="form-group margin-bottom-5">
-          <label class="col-md-3 col-sm-3 col-xs-12">{{labelContentArticle}}</label>
-        </div>
-        <hr class="margin-top-5">
-        <div class="form-group" ng-class="{ 'has-error' : createArticleForm.category_detail_id.$invalid && !createArticleForm.category_detail_id.$pristine }">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelCategory}} <span class="required">*</span></label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-						<select class="form-control" ng-model="data.category_detail_id" name="category_detail_id"
-						 ng-options="categoryDetail.name group by categoryDetail.category.name for categoryDetail in categoryDetails track by categoryDetail.id" required>
-	        	</select>
-            <span ng-show="createArticleForm.category_detail_id.$error.required" class="help-block">{{labelCategory}} {{required}}</span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelCity}}<span class="required">*</span></label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-						<select class="form-control" name="city_id"
-						ng-model="data.city_id" ng-options="city.name for city in cities track by city.id" required>
-	        	</select>
-            <span ng-show="createArticleForm.city_id.$error.required" class="help-block">{{labelCity}} {{required}}</span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelType}} <span class="required">*</span></label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="radio">
-							<input type="radio" ng-model="data.type" value="sell" id="radioSellCreateArticle" class="radioButtonCreateArticle" />
-							<label for="radioSellCreateArticle" class="radioLabelCreateArticle">{{labelSell}}</label>
-							<input type="radio" ng-model="data.type" value="buy" id="radioBuyCreateArticle" class="radioButtonCreateArticle" />
-							<label for="radioBuyCreateArticle" class="radioLabelCreateArticle">{{labelBuy}}</label>
-            </div>
-          </div>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error' : createArticleForm.title.$invalid && !createArticleForm.title.$pristine }">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelTitle}} <span class="required">*</span>
-          </label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <input ng-model="data.title" name="title" class="date-picker form-control col-md-7 col-xs-12" required type="text" ng-minlength="3" ng-maxlength="256">
-            <span class="help-block" ng-show="createArticleForm.title.$error.required">{{labelTitle}} {{required}}</span>
-            <span class="help-block" ng-show="createArticleForm.title.$error.minlength">{{labelTitle}} {{minLength}}</span>
-            <span class="help-block" ng-show="createArticleForm.title.$error.maxlength">{{labelTitle}} {{maxLength}}</span>
-          </div>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error' : createArticleForm.description.$invalid && !createArticleForm.description.$pristine }">
+      </div>
+      <div class="form-group" ng-class="{ 'has-error' : createArticleForm.description.$invalid && !createArticleForm.description.$pristine }">
           <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelDescription}} <span class="required">*</span>
           </label>
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <textarea ng-model="data.description" name="description" class="form-control" rows="3" ng-minlength="3" ng-maxlength="2000" required></textarea>
-            <span class="help-block" 
-              ng-show="createArticleForm.description.$error.required">{{labelDescription}} {{required}}</span>
+            <textarea ng-model="data.description" name="description" class="form-control" rows="3" ng-minlength="3" ng-maxlength="2000" ng-required="true"></textarea>
+            <span class="help-block" ng-show="createArticleForm.title.$dirty  && createArticleForm.description.$error.required">{{labelDescription}} {{required}}</span>
             <span class="help-block" ng-show="createArticleForm.description.$error.minlength">
               {{labelDescription}} {{minLength}}
             </span>
             <span ng-show="createArticleForm.description.$error.maxlength" class="help-block">{{labelDescription}} {{maxLength}}</span>
           </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelPrice}} :
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <input ng-model="data.price" name="price" class="date-picker form-control col-md-7 col-xs-12" numbers-only type="text">
         </div>
-        <div class="form-group" ng-class="{ 'has-error' : createArticleForm.price.$invalid && !createArticleForm.price.$pristine }">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelPrice}} <span class="required">*</span>
-          </label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <input ng-model="data.price" name="price" class="date-picker form-control col-md-7 col-xs-12" required numbers-only type="text">
-            <span class="help-block" ng-show="createArticleForm.price.$error.required">{{labelPrice}} {{required}}</span>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error' : createArticleForm.files.$invalid && !createArticleForm.files.$pristine }">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelImages}} <span class="required">*</span></label>
+        <div class="col-md-6 col-sm-6 col-xs-12 well articleCreateImageBox">
+          <input type="file" valid-file name="files" ng-model="files" nv-file-select uploader="uploader" ng-required="true" multiple/>
+          <span class="help-block" ng-show="createArticleForm.files.$dirty  && createArticleForm.files.$error.required">{{labelImages}} {{required}}</span>
+          <span>{{ labelTotalFiles }}: {{ uploader.queue.length }}</span>
+          <br/>
+          <div ng-repeat="item in uploader.queue">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <div class="thumbnail">
+                <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, width: 100, height: 100 }" class="center thumbnail"></div>
+                <div class="caption">
+                  <h5 class="pull-right">
+            				<a class="btn btn-danger btn-xs" ng-click="item.remove()">
+            					<span class="glyphicon glyphicon-trash"></span>
+            				</a>
+            			</h5>
+                  <h5>
+                    <div ng-show="uploader.isHTML5" nowrap>{{ item.file.size/MB/MB|number:2 }} {{ labelData }}</div>
+            			</h5>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-				<div class="form-group">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelImages}} <span class="required">*</span>
-          </label>
-          <div class="col-md-6 col-sm-6 col-xs-12 well articleCreateImageBox">
-							<input type="file" nv-file-select uploader="uploader" required="required" multiple filters="{imageFilter}" /><br/>
-							<span>{{ labelTotalFiles }}: {{ uploader.queue.length }}</span>
-							<div ng-repeat="item in uploader.queue">
-								
-								<div class="col-md-4 col-sm-12 col-xs-12">
-									<div class="thumbnail">
-										<div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, width: 100, height: 100 }" class="center thumbnail"></div>
-										<div class="caption">
-											<h5 class="pull-right">
-												<a class="btn btn-danger btn-xs" ng-click="item.remove()">
-													<span class="glyphicon glyphicon-trash"></span>
-												</a>
-											</h5>
-											<h5><div ng-show="uploader.isHTML5" nowrap>{{ item.file.size/MB/MB|number:2 }} {{ labelData }}</div>
-											</h5>
-										</div>
-									</div>
-								</div>
-							</div>
-          </div>
+      </div>
+      <div class="ln_solid"></div>
+      <div class="form-group">
+        <div class="col-md-12 col-sm-12 col-xs-12 center">
+          <a class="btn btn-primary"> <i class="fa fa-times" aria-hidden="true"></i> {{ buttonCancel }}</a>
+          <a class="btn btn-success" ng-disabled="!createArticleForm.$valid" ng-click="submit(createArticleForm.$valid)"> <span class="glyphicon glyphicon-upload"></span> {{ buttonSubmit }}</a>
         </div>
-        <div class="ln_solid"></div>
-        <div class="form-group">
-          <div class="col-md-12 col-sm-12 col-xs-12 center">
-            <a class="btn btn-primary"> <i class="fa fa-times" aria-hidden="true"></i> {{ buttonCancel }}</a>
-            <a class="btn btn-success"> <span class="glyphicon glyphicon-upload"></span> {{ buttonSubmit }}</a>
-          </div>
-        </div>
-      </form>
-    </div>
-			
+      </div>
+    </form>
+  </div>
 </div>

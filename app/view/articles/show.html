@@ -3,40 +3,36 @@
 <div class="container">
 	<div>
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
       </div>
       <!-- Article Article Content Column -->
-      <div class="col-md-7">
+      <div class="col-md-8">
         <div class="row thumbnail padding-10" id="articleShowContentBox">
           <!-- Article Article -->
 
           <!-- Title -->
-          <h1>{{ article.title }}</h1>
+          <span class="label-title">{{ article.title }}</span>
 
           <!-- Author -->
-          <p class="lead">
-            {{ labelCreatedBy }}: <a href="#"> {{ article.user.email }}</a>
+          <p class="margin-top-5 margin-bottom-5">
+						<span>
+							{{ labelCreatedBy }}: <a href="#"> {{ article.user.email }}</a>
+						</span>
           </p>
-
-          <hr>
+          <hr class="margin-top-5 margin-bottom-5">
           <!-- Date/Time -->
           <p><span class="glyphicon glyphicon-time"></span> {{ labelPostedOn }}: {{ article.created_at }} </p>
-          <hr>
-
+          <hr class="margin-top-5 margin-bottom-5">
           <!-- Preview Image -->
 					<div id="carouselShowArticle" class="carousel slide" data-ride="carousel">
 				    <!-- Indicators -->
 				    <ol class="carousel-indicators">
-				      <li data-target="#carouselShowArticle" data-slide-to="0" class="active"></li>
-				      <li data-target="#carouselShowArticle" data-slide-to="1"></li>
-				      <li data-target="#carouselShowArticle" data-slide-to="2"></li>
-				      <li data-target="#carouselShowArticle" data-slide-to="3"></li>
+				      <li data-target="#{{article.slug}}" data-slide-to="{{image.id}}" ng-repeat= "image in article.images"></li>
 				    </ol>
-
 				    <!-- Wrapper for slides -->
 				    <div class="carousel-inner" role="listbox">
-				      <div class="item active">
-				        <img src="">
+				      <div ng-attr-class="{{ article.images[0]== image && 'item active' || 'item'}}" ng-repeat= "image in article.images">
+				        <img src="{{ urlUploads }}/{{ image.name }}" alt={{image.name}}> 
 				      </div>
 				    </div>
 				    <!-- Left and right controls -->
@@ -53,7 +49,6 @@
           <!-- Article Content -->
           <p class="lead"> {{ article.description }}</p>
           <hr>
-
           <!-- Article Comments -->
 
           <!-- Comments Form -->

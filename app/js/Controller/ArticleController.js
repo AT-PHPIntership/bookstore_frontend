@@ -2,7 +2,7 @@
 var articleControllers = angular.module('articleControllers', []);
 
 articleControllers.controller('ArticleShowController', 
-  function ($scope, $stateParams, Article, commonLanguage, showArticleLanguage) {
+  function ($scope, $stateParams, Article, commonLanguage, showArticleLanguage, urlUploads) {
     // set language
     $scope.labelLeaveAComment = commonLanguage.labelLeaveAComment;
     $scope.buttonSubmit = commonLanguage.buttonSubmit;
@@ -11,9 +11,12 @@ articleControllers.controller('ArticleShowController',
     $scope.previousButton = showArticleLanguage.previousButton;
     $scope.nextButton = showArticleLanguage.nextButton;
     
+    // process logic
+    $scope.urlUploads = urlUploads;
     Article.get({ slug : $stateParams.slug }).$promise
       .then(function (data) {
         $scope.article = data;
+        console.log(data);
       })
       .catch(function (fallback) {
         $scope.labelError = commonLanguage.labelError;
@@ -57,6 +60,9 @@ articleControllers.controller('ArticleCreateController',
     $scope.email = UserService.getCredentials().email;
     $scope.phone = UserService.getCredentials().phone;
     $scope.address = UserService.getCredentials().address;
+    $scope.data = {
+      'type' : 'sell',
+    };
     CategoryDetail.query().$promise
       .then(function (data) {
         $scope.categoryDetails = data;
