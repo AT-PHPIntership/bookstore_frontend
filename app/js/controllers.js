@@ -84,7 +84,7 @@ bookControllers.controller('AboutController',
   }
 );
 
-bookControllers.controller('LoginController', function ($scope, $location, AuthenticationService, constant,
+bookControllers.controller('LoginController', function ($scope, $state, AuthenticationService, constant,
     commonLanguage) {
     $scope.init = function () {
       // set language

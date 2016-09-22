@@ -76,6 +76,11 @@ bookApp.run(function ($rootScope ,$location, UserService, $state) {
           event.preventDefault();
           $state.go("login");
         }
+      }else {
+        if (next.name == "login") {
+          event.preventDefault();
+          $state.go("home");
+        }
       }
   });
   $rootScope.url = $state;
