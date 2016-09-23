@@ -53,13 +53,10 @@
 
           <!-- Comments Form -->
           <div class="well">
-              <h4>{{ labelLeaveAComment }}:</h4>
-              <form role="form">
-                  <div class="form-group">
-                      <textarea class="form-control" rows="3"></textarea>
-                  </div>
-                  <button type="submit" class="btn btn-primary"> {{ buttonSubmit }}</button>
-              </form>
+							<div class="row">
+								<div class="fb-comments" facebook-comment-box page-href="{{currentUrl}}"
+								 data-numposts="5" data-colorscheme="light" data-width="100%"></div>
+							</div>
           </div>
 
           <hr>

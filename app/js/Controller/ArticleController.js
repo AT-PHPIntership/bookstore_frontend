@@ -14,7 +14,7 @@ articleControllers.controller('ArticleShowController',
       
       // process logic
       $scope.urlUploads = constant.urlUploads;
-      
+      $scope.currentUrl = constant.urlArticle+"/"+$stateParams.slug;
       Article.get($stateParams.slug).then(function (response){
         $scope.article = response.data;
       }, function (response) {
