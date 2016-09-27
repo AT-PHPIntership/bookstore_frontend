@@ -17,7 +17,7 @@ shareServices.factory('City', function($http, constant) {
 });
 
 
-shareServices.factory('Article', function($http, constant, UserService) {
+shareServices.factory('Article', function($http, $rootScope, constant) {
     var article = {};
     article.query = function() {
         return $http({
@@ -25,7 +25,7 @@ shareServices.factory('Article', function($http, constant, UserService) {
             url: constant.urlArticle,
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': UserService.getToken()
+                'Authorization': $rootScope.globals.currentUser.token
             }
         });
     };
@@ -38,7 +38,7 @@ shareServices.factory('Article', function($http, constant, UserService) {
             },
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': UserService.getToken()
+                'Authorization': $rootScope.globals.currentUser.token
             }
         });
     };
@@ -54,7 +54,7 @@ shareServices.factory('Article', function($http, constant, UserService) {
             transformRequest: angular.identity,
             headers: {
                 'Content-Type': undefined,
-                'Authorization': UserService.getToken()
+                'Authorization': $rootScope.globals.currentUser.token
             }
         }).success(function(response) {
 
@@ -96,81 +96,40 @@ shareServices.factory('CategoryDetail', function($http, constant) {
 });
 
 
-shareServices.factory('AuthenticationService', function($http, $q, UserService) {
-    var authenticationService = {};
-    authenticationService.login = function(email, password, urlAuthentication) {
-        var deferred = $q.defer();
-        return $http.post(urlAuthentication, {
-            email: email,
-            password: password
-        })
+
+shareServices.factory('AuthenticationService', function ($http, $cookieStore, $rootScope, $timeout) {
+    var service = {};
+
+    service.login = function (urlAuthentication, email, password, callback) {
+        $http.post(urlAuthentication, { email: email, password: password })
         .success(function(response) {
-            if (response.token) {
-                // store username and token in local storage to keep user logged in between page refreshes
-                UserService.setToken(response.token);
-                UserService.setCredentials(
-                    response.user.id,
-                    response.user.profile.name,
-                    response.user.email,
-                    response.user.profile.phone,
-                    response.user.profile.address
-                );
-            }
-            deferred.resolve(response);
+            callback(response);
         })
-        .error(function(response) {
-            deferred.reject(response);
-        });
     };
-    authenticationService.onlyLoggedIn = function ($state, $q, UserService) {
-        console.log(UserService.isLoggedIn());
-        var deferred = $q.defer();
-        if (UserService.isLoggedIn()) {
-            deferred.resolve();
-        } else {
-            deferred.reject();
-            $state.go('login');
-        }
-        return deferred.promise;
+
+    service.setCredentials = function (email, profile, token) {
+        $rootScope.globals = {
+            currentUser: {
+                email: email,
+                profile: profile,
+                token: token
+            }
+        };
+
+        $http.defaults.headers.common['Authorization'] = token;
+        $cookieStore.put('globals', $rootScope.globals);
     };
-    return authenticationService;
+
+    service.clearCredentials = function () {
+        $rootScope.globals = {};
+        $cookieStore.remove('globals');
+        $http.defaults.headers.common.Authorization = '';
+    };
+
+    return service;
 });
 
 
-shareServices.factory("UserService", function($window, $state, $rootScope) {
-    var userService = {};
-    userService.setToken = function(token) {
-            $window.localStorage && $window.localStorage.setItem('token', token);
-            return this;
-        },
-        userService.getToken = function() {
-            return $window.localStorage && $window.localStorage.getItem('token');
-        },
-        userService.setCredentials = function(id, name, email, phone, address) {
-            $window.localStorage && $window.localStorage.setItem('id', id);
-            $window.localStorage && $window.localStorage.setItem('name', name);
-            $window.localStorage && $window.localStorage.setItem('email', email);
-            $window.localStorage && $window.localStorage.setItem('phone', phone);
-            $window.localStorage && $window.localStorage.setItem('address', address);
-        },
-        userService.getCredentials = function() {
-            var credentials = {};
-            credentials.id = $window.localStorage && $window.localStorage.getItem('id');
-            credentials.name = $window.localStorage && $window.localStorage.getItem('name');
-            credentials.email = $window.localStorage && $window.localStorage.getItem('email');
-            credentials.phone = $window.localStorage && $window.localStorage.getItem('phone');
-            credentials.address = $window.localStorage && $window.localStorage.getItem('address');
-            return credentials;
-        },
-        userService.logout = function() {
-            $window.localStorage.clear();
-            $state.go('login');
-        },
-        userService.isLoggedIn = function() {
-            return $window.localStorage.email ? true : false;
-        }
-    return userService;
-});
 
 shareServices.factory('ResponseStatusHandleService', function($state, constant) {
     var responseStatusHandleService = {};

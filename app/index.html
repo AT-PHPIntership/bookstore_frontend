@@ -13,7 +13,7 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="bower_components/satellizer/dist/satellizer.min.js"></script>
-    <script src="bower_components/ngstorage/ngStorage.min.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.min.js" charset="utf-8"></script>
     <script src="bower_components/angular-timeago/dist/angular-timeago.min.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.min.js" charset="utf-8"></script>
     <script src="bower_components/angular-animate/angular-animate.min.js" charset="utf-8"></script>
@@ -37,6 +37,7 @@
     <script src="bower_components/angular-file-upload/dist/angular-file-upload.js" charset="utf-8"></script>
   </head>
   <body>
+    <div ng-include="" src="'view/partials/header.html'"></div>
     <div ui-view class="background-content"></div>  
     <div ng-include="" src="'view/partials/footer.html'"></div>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>

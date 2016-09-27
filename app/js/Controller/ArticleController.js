@@ -26,8 +26,7 @@ articleControllers.controller('ArticleShowController',
 );
 
 articleControllers.controller('ArticleCreateController', 
-  function ($scope, $stateParams, CategoryDetail, City, Article, FileUploader, 
-      UserService, commonLanguage, ResponseStatusHandleService) {
+  function ($scope, $stateParams, CategoryDetail, City, Article, FileUploader, commonLanguage, ResponseStatusHandleService) {
       $scope.init = function () {
         // set language
         $scope.labelBuy = commonLanguage.common.labelBuy;
@@ -72,12 +71,6 @@ articleControllers.controller('ArticleCreateController',
           ResponseStatusHandleService.process(response.status);
         });
       };
-    
-    // process logic
-    $scope.credentials = angular.toJson(UserService.getCredentials());
-    $scope.name = UserService.getCredentials().name;
-    $scope.phone = UserService.getCredentials().phone;
-    $scope.address = UserService.getCredentials().address;
     
     
     var uploader = $scope.uploader = new FileUploader();

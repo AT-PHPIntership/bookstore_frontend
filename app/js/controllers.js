@@ -7,7 +7,7 @@ var bookControllers = angular.module('bookControllers', [
 ]);
 
 bookControllers.controller('ViewController', 
-  function ($rootScope, $scope, UserService, commonLanguage, Category) {
+  function ($rootScope, $scope, commonLanguage, Category) {
     $scope.init = function () {
       // set language
       $scope.titlePage = commonLanguage.common.titlePage;
@@ -32,9 +32,6 @@ bookControllers.controller('ViewController',
       $scope.labelCarrer = commonLanguage.common.labelCarrer;
       $scope.labelLicense = commonLanguage.common.labelLicense;
       
-      $rootScope.isLoggedIn = UserService.isLoggedIn();
-      $rootScope.email = UserService.getCredentials().email;
-      
       Category.query().then(function (response){
         $scope.categories = response.data;
       }, function (response) {
@@ -47,15 +44,13 @@ bookControllers.controller('ViewController',
 );
 
 bookControllers.controller('HomeController', function (
-  $rootScope, $scope, Article, commonLanguage, UserService, constant) {
+  $rootScope, $scope, Article, commonLanguage, constant) {
     
     $scope.init = function () {
       // set language
       $scope.labelBuy = commonLanguage.common.labelBuy;
       $scope.labelSell = commonLanguage.common.labelSell;
       $scope.dollarCurrency = commonLanguage.homeLanguage.dollarCurrency;
-      $rootScope.isLoggedIn = UserService.isLoggedIn();
-      $rootScope.email = UserService.getCredentials().email;
       // process logic
       
       Article.query().then(function (response){
@@ -74,13 +69,14 @@ bookControllers.controller('HomeController', function (
 );
 
 bookControllers.controller('LogoutController', 
-  function (UserService) {
-    UserService.logout();
+  function ($state, AuthenticationService) {
+    AuthenticationService.clearCredentials();
+    $state.go('login');
   }
 );
 
 bookControllers.controller('AboutController',  
-  function ($scope, UserService) {
+  function ($scope) {
   }
 );
 
@@ -116,14 +112,16 @@ bookControllers.controller('LoginController', function ($scope, $state, Authenti
       $scope.isShowedLogin = value;
     };
     $scope.login = function () {
-      AuthenticationService.login($scope.email, $scope.password, constant.urlAuthentication).then(
-        function(successParam) { 
-          $state.go('home');
-        }, function(rejectParam) {
-          $state.go('login');
-          $scope.labelInvalidAccount = commonLanguage.common.labelInvalidAccount;
-        }
-      );
+      
+      AuthenticationService.login(constant.urlAuthentication, $scope.email, $scope.password, function (response) {
+          if (response.token) {
+              AuthenticationService.setCredentials($scope.email, response.user.profile, response.token);
+              $state.go('home');
+          } else {
+              $scope.error = response.message;
+              $state.go('login');
+          }
+      });
     }
     $scope.init();
 });
