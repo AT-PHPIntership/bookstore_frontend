@@ -1,5 +1,3 @@
-<div ng-include="" src="'view/partials/guestHeader.html'" ng-show="!isLoggedIn"></div>
-<div ng-include="" src="'view/partials/userHeader.html'" ng-show="isLoggedIn"></div>
 <div class="container">
   <div class="row thumbnail padding-10" id="articleShowContentBox">
     <div class="alert alert-success" ng-show="success">
@@ -14,26 +12,26 @@
       <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ labelName }} :</label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-          <input type="text" ng-model="name" class="form-control col-md-7 col-xs-12" disabled>
+          <input type="text" ng-model="globals.currentUser.profile.name" class="form-control col-md-7 col-xs-12" disabled>
         </div>
       </div>
       <div class="form-group">
           <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelEmail}} :</label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-          <input type="text" ng-model="email" name="last-name" class="form-control col-md-7 col-xs-12" disabled>
+          <input type="text" ng-model="globals.currentUser.email" name="last-name" class="form-control col-md-7 col-xs-12" disabled>
         </div>
       </div>
       <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelPhone}} :</label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-          <input ng-model="phone" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" disabled>
+          <input ng-model="globals.currentUser.profile.phone" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" disabled>
         </div>
       </div>
       <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelAddress}} :
         </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-          <input ng-model="address" class="form-control col-md-7 col-xs-12" type="text" disabled>
+          <input ng-model="globals.currentUser.profile.address" class="form-control col-md-7 col-xs-12" type="text" disabled>
         </div>
       </div>
       <div class="form-group margin-bottom-5">

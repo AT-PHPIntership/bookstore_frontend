@@ -7,7 +7,7 @@ var bookApp = angular.module('bookApp', [
   'languageService',
   'satellizer',
   'ui.router',
-  'ngStorage',
+  'ngCookies',
   'yaru22.angular-timeago',
   'angularFileUpload',
   'ui.bootstrap',
@@ -66,10 +66,18 @@ bookApp.config(['$stateProvider', '$urlRouterProvider', '$authProvider', '$httpP
   }
 ]);
 var urlBase = 'http://bookstore.me';
-bookApp.run(function ($rootScope ,$location, UserService, $state) {
+bookApp.run(function ($rootScope, $state, $cookieStore, $http) {
   $rootScope.endPoint = urlBase;
+  
+  
+  // keep user logged in after page refresh
+  $rootScope.globals = $cookieStore.get('globals') || {};
+  if ($rootScope.globals.currentUser) {
+      $http.defaults.headers.common['Authorization'] = $rootScope.globals.currentUser.token;
+  }
+
   $rootScope.$on("$stateChangeStart", function(event, next, current) {
-      if (!UserService.isLoggedIn() ) {
+      if (!$rootScope.globals.currentUser) {
         if (next.name == "login" || next.name == "home" || next.name == "article-show") {
           return ;
         } else {
