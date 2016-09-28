@@ -1,22 +1,20 @@
-.navigation {
+#navigation {
   padding: 0px;
-  padding-bottom: 5px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  
 }
-.nav-tabs {
-  background-color: #d8cebd;
-  padding-right: 0px;
-}
-.nav-tabs > li {
+#navigation .nav-tabs > li {
   width: 50%;
+  background-color: #e4ecb7;
 }
 
-.nav-tabs li a {
+#navigation .nav-tabs li a {
   text-decoration: none;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 16px;
   margin: 0px;
+  color: #e07513;
 }
 
 @charset "utf-8";
@@ -24,28 +22,28 @@
 /* ---------------------------------------------
  Common Set 
 --------------------------------------------- */
-.menu {
+#navigation .menu {
   padding: 0px;
   margin: 0px;
 }
 
-.menu .iterate a:link,
-.menu .iterate a:visited,
-.menu .iterate a:hover,
-.menu .iterate a:active {
+#navigation .menu .iterate a:link,
+#navigation .menu .iterate a:visited,
+#navigation .menu .iterate a:hover,
+#navigation .menu .iterate a:active {
   color: #e07513;
 }
 
-a:hover, a:active { text-decoration: none; }
+#navigation a:hover, a:active { text-decoration: none; }
 
-.menu .iterate {
+#navigation .menu .iterate {
   margin: 0 auto;
   padding: 0;
 }
 
-.menu .iterate li { list-style: none; }
+#navigation .menu .iterate li { list-style: none; }
 
-.menu .iterate li a {
+#navigation .menu .iterate li a {
   display: table;
   margin-top: 1px;
   padding: 14px 10px;
@@ -64,9 +62,9 @@ a:hover, a:active { text-decoration: none; }
   transition-timing-function: ease-out;
 }
 
-.menu .iterate > li:first-child a { margin-top: 0; }
+#navigation .menu .iterate > li:first-child a { margin-top: 0; }
 
-.menu .iterate li a:hover {
+#navigation .menu .iterate li a:hover {
   background: #ddd;
   -webkit-transition-property: background;
   -webkit-transition-duration: 0.2s;
@@ -76,12 +74,12 @@ a:hover, a:active { text-decoration: none; }
   transition-timing-function: ease-out;
 }
 
-.menu .iterate li ul {
+#navigation .menu .iterate li ul {
   margin: 0;
   padding: 0;
 }
 
-.menu .iterate li li a {
+#navigation .menu .iterate li li a {
   display: block;
   margin-top: 0;
   padding: 0 10px;
@@ -96,7 +94,7 @@ a:hover, a:active { text-decoration: none; }
   transition-timing-function: ease-out;
 }
 
-.menu .iterate > li:hover li a {
+#navigation .menu .iterate > li:hover li a {
   display: table;
   margin-top: 1px;
   padding: 10px;
@@ -110,7 +108,7 @@ a:hover, a:active { text-decoration: none; }
   transition-timing-function: ease-out;
 }
 
-.menu .iterate > li:hover li a:hover {
+#navigation .menu .iterate > li:hover li a:hover {
   background: #A4CAC8;
   -webkit-transition-property: background;
   -webkit-transition-duration: 0.2s;
@@ -120,11 +118,15 @@ a:hover, a:active { text-decoration: none; }
   transition-timing-function: ease-out;
 }
 
-.tab-content span.fa {
+#navigation .tab-content span.fa {
   float: right;
   text-align: center;
   margin-top: 5px;
   font-size: 10px;
   min-width: inherit;
   color: #e07513;
+}
+
+#navigation .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  background: #155e63;
 }

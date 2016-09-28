@@ -108,5 +108,5 @@ bookApp.constant("constant", {
   'storagePath': 100,
   'defaultCurrentPage': 1,
   'maxSizePagination': 5,
-  'maxSelectedPagination': 5,
+  'maxSelectedPagination': 4,
 });

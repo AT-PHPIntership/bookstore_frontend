@@ -20,17 +20,11 @@ bookControllers.controller('ViewController',
       $scope.titleWebPage = commonLanguage.common.titleWebPage;
       $scope.labelLogout = commonLanguage.common.labelLogout;
       $scope.labelEmail = commonLanguage.common.labelEmail;
-      $scope.labelPhone = commonLanguage.common.labelPhone;
-      $scope.labelContact = commonLanguage.common.labelContact.toUpperCase();
-      $scope.labelAbout = commonLanguage.common.labelAbout;
-      $scope.contentAbout = commonLanguage.common.contentAbout;
-      $scope.labelCustomerServices = commonLanguage.common.labelCustomerServices;
-      $scope.contentCustomerServices = commonLanguage.common.contentCustomerServices;
-      $scope.labelHumanResource = commonLanguage.common.labelHumanResource;
-      $scope.contentHumanResource = commonLanguage.common.contentHumanResource;
-      $scope.labelAuthor = commonLanguage.common.labelAuthor;
+      $scope.labelAboutUs = commonLanguage.common.labelAboutUs;
+      $scope.labelContact = commonLanguage.common.labelContact;
       $scope.labelCarrer = commonLanguage.common.labelCarrer;
       $scope.labelLicense = commonLanguage.common.labelLicense;
+      $scope.labelRecruitment = commonLanguage.common.labelRecruitment;
       
       Category.query().then(function (response){
         $scope.categories = response.data;

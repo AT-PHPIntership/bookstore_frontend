@@ -25,7 +25,6 @@ shareServices.factory('Article', function($http, $rootScope, constant) {
             url: constant.urlArticle,
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': $rootScope.globals.currentUser.token
             }
         });
     };

@@ -1,39 +1,20 @@
-<ul class="nav nav-tabs col-md-12 col-sm-12 col-xs-12">
-  <li class="active"><a data-toggle="tab" href data-target="#homeBuyBox">{{ labelBuy}}</a></li>
-  <li><a data-toggle="tab" href data-target="#homeSellBox">{{ labelSell }}</a></li>
-</ul>
-
-<div class="tab-content">
-  <div id="homeBuyBox" class="tab-pane fade in active background-navigation">
-    <nav class="menu_box">
-      <ul class="menu">
-        <div ng-repeat="category in categories" class="iterate">
-          <li> 
-            <a ng-click="chooseCategoryBuy(category.name, (category.category_details).length)">
-              <i class="fa fa-paper-plane"></i> {{ category.name }} <span class="fa fa-chevron-down" ng-show="(category.category_details).length"> 
-            </a>
-            <ul ng-repeat="categoryDetail in category.category_details">
-              <li><a ng-click="chooseCategoryBuy(categoryDetail.name, (category.category_details).length)"> {{ categoryDetail.name }}</a></li>
-            </ul>
-          </li>
-        </div>
-      </ul>
-    </nav>
-  </div>
-  <div id="homeSellBox" class="tab-pane fade background-navigation">
-    <nav class="menu_box">
-      <ul class="menu">
-        <div ng-repeat="category in categories" class="iterate">
-          <li> 
-            <a ng-click="chooseCategorySell(categoryDetail.name, (category.category_details).length)"> 
-              <i class="fa fa-paper-plane"></i> {{ category.name }} <span class="fa fa-chevron-down" ng-show="(category.category_details).length"> 
-            </a>
-            <ul ng-repeat="categoryDetail in category.category_details">
-              <li><a ng-click="chooseCategorySell(categoryDetail.name, (category.category_details).length)"> {{ categoryDetail.name }}</a></li>
-            </ul>
-          </li>
-        </div>
-      </ul>
-    </nav>
-  </div>
-</div>
+<uib-tabset active="active" class="navigation" id="navigation">
+  <uib-tab index="0" heading="{{labelBuy}}">
+      <nav class="menu_box">
+        <ul class="menu">
+          <div ng-repeat="category in categories" class="iterate">
+            <li> 
+              <a ng-click="chooseCategoryBuy(category.name, (category.category_details).length)">
+                <i class="fa fa-paper-plane"></i> {{ category.name }} <span class="fa fa-chevron-down" ng-show="(category.category_details).length"> 
+              </a>
+              <ul ng-repeat="categoryDetail in category.category_details">
+                <li><a ng-click="chooseCategoryBuy(categoryDetail.name, (category.category_details).length)"> {{ categoryDetail.name }}</a></li>
+              </ul>
+            </li>
+          </div>
+        </ul>
+      </nav>
+  </uib-tab>
+  <uib-tab heading="{{labelSell}}" ui-sref="article-create">
+  </uib-tab>
+</uib-tabset>
