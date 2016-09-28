@@ -1,19 +1,19 @@
 /** http://getbootstrap.com/getting-started/#support-ie10-width*/
 
 @-webkit-viewport {
-  width: device-width;
+    width: device-width;
 }
 @-moz-viewport {
-  width: device-width;
+    width: device-width;
 }
 @-ms-viewport {
-  width: device-width;
+    width: device-width;
 }
 @-o-viewport {
-  width: device-width;
+    width: device-width;
 }
 @viewport {
-  width: device-width;
+    width: device-width;
 }
 
 /*!
@@ -27,93 +27,79 @@
 @import url("footer.css");
 @import url("home.css");
 @import url("nav.css");
-
 @import url("articles/create.css");
 
 /* 404 */
+
 @import url("errors/style.css");
-@import url("errors/responsive.css");
 
+
+.main-content {
+    background: #1d1d1d url('../images/pattern.png') repeat;
+    padding: 15px;
+}
+
+.content {
+  padding-top: 10px;
+}
+
+.content-background {
+  background-color: #e4ecb7;
+}
 .item {
-  border-radius: 4px;
+    border-radius: 4px;
 }
-
 .caption {
-  height: 130px;
-  overflow: hidden;
+    height: 130px;
+    overflow: hidden;
 }
-
 .caption h4 {
-  white-space: nowrap;
+    white-space: nowrap;
 }
-
 .thumbnail {
-  padding: 0;
+    padding: 0;
 }
-
 .thumbnail .caption-full {
-  padding: 9px;
-  color: #333;
+    padding: 9px;
+    color: #333;
 }
 .padding-10 {
-  padding: 10px;
+    padding: 10px;
 }
-
 .padding-top-30 {
-  padding-top: 30px;
+    padding-top: 30px;
 }
-
 .margin-bottom-25 {
-  margin-bottom: 25px;
+    margin-bottom: 25px;
 }
-
 .margin-top-5 {
-  margin-top: 5px;
+    margin-top: 5px;
 }
-
 .margin-bottom-5 {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
-
 .margin-top-20 {
-  margin-top: 20px;
+    margin-top: 20px;
 }
-
 .margin-default {
-  margin: 0px;
+    margin: 0px;
 }
-
 .center {
-  text-align: center;
-}
-
-.background-content {
-  background-color: #999;
-}
-
-.background-header, .background-footer {
-  background-color: #333;
-}
-.background-navigation {
-  background-color: #fff;
+    text-align: center;
 }
 .header-color, .footer-color {
-  color : #fff;
+    color: #fff;
 }
-
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img {
+.carousel-inner> .item> img, .carousel-inner> .item> a> img {
     width: 100%;
     margin: auto;
 }
 .label-title {
-  font-size: 25px;
+    font-size: 25px;
 }
-
 .font-size {
-  font-size: 16px;
+    font-size: 16px;
 }
-
-.pagination-sm > li > a {
-  font-size: 14px;
+.pagination-sm> li> a {
+    font-size: 14px;
 }

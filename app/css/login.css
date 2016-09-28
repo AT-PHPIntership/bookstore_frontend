@@ -1,19 +1,30 @@
-#loginForgotPasswordBox {
+#loginForgotPasswordLabel {
   float:right;
   font-size: 80%;
   position: relative;
   top:-10px;
 }
 
-#loginSignupBox {
+#loginSignupLabel {
   border-top: 1px solid#888;
   padding-top:15px;
   font-size:85%;
 }
 
-#loginSigninBox {
+#loginSigninLabel {
   float:right;
   font-size: 85%;
   position: relative;
   top:-10px;
+}
+
+
+#loginbox {
+  padding-top: 41px;
+  padding-bottom: 41px;
+}
+
+#signupbox {
+  padding-top: 22px;
+  padding-bottom: 22px;
 }

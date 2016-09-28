@@ -1,76 +1,12 @@
-<footer class="footer background-footer footer-color">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3 col-md-3">
-        <ul class="list-unstyled clear-margins">
-        	<li class="widget-container widget_nav_menu">
-            <h1 class="title-widget"> {{ labelAbout }}</h1>
-            <p>
-              {{ contentAbout }}
-            </p>
-          </li>
-        </ul>
-      </div>
-      <div class="col-lg-3 col-md-3"><!-- widgets column left -->
-        <ul class="list-unstyled clear-margins"><!-- widgets -->
-          <li class="widget-container widget_nav_menu"><!-- widgets list -->
-            <h1 class="title-widget"> {{ labelCustomerServices }} </h1>
-            <p>
-              {{ contentCustomerServices }}
-            </p>
-          </li>
-        </ul>
-      </div><!-- widgets column left end -->
-                
-      <div class="col-lg-3 col-md-3"><!-- widgets column left -->
-        <ul class="list-unstyled clear-margins"><!-- widgets -->
-          <li class="widget-container widget_nav_menu"><!-- widgets list -->
-            <h1 class="title-widget"> {{ labelHumanResource }} </h1>
-            <p>
-              {{ contentHumanResource }}
-            </p>
-          </li>
-        </ul>
-      </div><!-- widgets column left end -->
-                
-      <div class="col-lg-3 col-md-3"><!-- widgets column center -->
-        <ul class="list-unstyled clear-margins"><!-- widgets -->
-          <li class="widget-container widget_recent_news"><!-- widgets list -->
-            <h1 class="title-widget"> {{ labelContact }} </h1>
-            <div class="footerp"> 
-              <p><b>{{ labelEmail }} : </b> <a href="mailto:dungnv.itdn@gmail.com">dungnv.itdn@gmail.com</a></p>
-              <p><b>{{ labelPhone }} : </b>0986.605.612 </p>
-            </div>
-            <div class="social-icons">
-              <ul class="nomargin">
-                <a href="https://www.facebook.com"><i class="fa fa-facebook-square fa-3x social-fb" id="social"></i></a>
-                <a href="https://twitter.com"><i class="fa fa-twitter-square fa-3x social-tw" id="social"></i></a>
-                <a href="https://plus.google.com"><i class="fa fa-google-plus-square fa-3x social-gp" id="social"></i></a>
-                <a href="mailto:bootsnipp@gmail.com"><i class="fa fa-envelope-square fa-3x social-em" id="social"></i></a>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </div>
-      
-    </div>
-  </div>
-</footer>
-<!--header-->
-
-<div class="footer-bottom">
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-				<div class="copyright">
-					{{ labelLicense }}
-				</div>
-			</div>
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-				<div class="design">
-				  <a href="#"> {{labelAuthor }} </a> |  <a target="_blank" href="http://www.webenlance.com">{{ labelCarrer }}</a>
-				</div>
-			</div>
-		</div>
-	</div>
+<div id="footer">
+    <p>
+      <a ui-sref="home">{{ labelHome }}</a> | 
+      <a href="examples.html">{{ labelAboutUs }}</a> | 
+      <a href="page.html">{{labelRecruitment}}</a> | 
+      <a href="contact.html">{{labelContact}}</a>
+    </p>
+    <p>
+      {{ labelLicense }} | 
+      {{ labelCarrer }}
+    </p>
 </div>
