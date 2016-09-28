@@ -19,30 +19,20 @@
           </p>
           <hr class="margin-top-5 margin-bottom-5">
           <!-- Date/Time -->
-          <p><span class="glyphicon glyphicon-time"></span> {{ labelPostedOn }}: {{ article.created_at }} </p>
+          <p class="pull-right"><span class="glyphicon glyphicon-time"></span> {{ labelPostedOn }}: {{ article.created_at }} </p>
           <hr class="margin-top-5 margin-bottom-5">
           <!-- Preview Image -->
-					<div id="carouselShowArticle" class="carousel slide" data-ride="carousel">
-				    <!-- Indicators -->
-				    <ol class="carousel-indicators">
-				      <li data-target="#{{article.slug}}" data-slide-to="{{image.id}}" ng-repeat= "image in article.images"></li>
-				    </ol>
-				    <!-- Wrapper for slides -->
-				    <div class="carousel-inner" role="listbox">
-				      <div ng-attr-class="{{ article.images[0]== image && 'item active' || 'item'}}" ng-repeat= "image in article.images">
-				        <img src="{{ urlUploads }}/{{ image.name }}" alt={{image.name}}> 
+					<div>
+				    <div uib-carousel active="active" interval="interval" no-wrap="false" >
+				      <div uib-slide ng-repeat="slide in slides" index="slide.id">
+				        <img ng-src="{{slide.image}}" style="margin:auto;">
+				        <div class="carousel-caption">
+				          <h4>Slide {{slide.id}}</h4>
+				        </div>
 				      </div>
 				    </div>
-				    <!-- Left and right controls -->
-				    <a class="left carousel-control" href data-target="#carouselShowArticle" role="button" data-slide="prev">
-				      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-				      <span class="sr-only"> {{ previousButton }}</span>
-				    </a>
-				    <a class="right carousel-control" href data-target="#carouselShowArticle" role="button" data-slide="next">
-				      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-				      <span class="sr-only">{{ nextButton }}</span>
-				    </a>
 				  </div>
+					
           <hr>
           <!-- Article Content -->
           <p class="lead"> {{ article.description }}</p>

@@ -12,16 +12,26 @@ articleControllers.controller('ArticleShowController',
       $scope.previousButton = commonLanguage.showArticleLanguage.previousButton;
       $scope.nextButton = commonLanguage.showArticleLanguage.nextButton;
       
-      // process logic
-      $scope.urlUploads = constant.urlUploads;
-      
       Article.get($stateParams.slug).then(function (response){
         $scope.article = response.data;
+        console.log(response.data.images);
+        
+        $scope.interval = constant.interval;
+        $scope.active = 0;
+        var slides = $scope.slides = [];
+        for (var i = 0; i < $scope.article.images.length; i++) {
+          slides.push({
+            image: constant.urlUploads + '/' + $scope.article.images[i].name,
+            id: i
+          });
+        }
       }, function (response) {
         ResponseStatusHandleService.process(response.status);
       });
+      
     };
     $scope.init();
+
   }
 );
 

@@ -109,4 +109,5 @@ bookApp.constant("constant", {
   'defaultCurrentPage': 1,
   'maxSizePagination': 5,
   'maxSelectedPagination': 4,
+  'interval': 2000,
 });
