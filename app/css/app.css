@@ -103,3 +103,7 @@
 .pagination-sm> li> a {
     font-size: 14px;
 }
+
+.float-right {
+  float: right;
+}

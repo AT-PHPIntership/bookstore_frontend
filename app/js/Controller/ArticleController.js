@@ -14,8 +14,6 @@ articleControllers.controller('ArticleShowController',
       
       Article.get($stateParams.slug).then(function (response){
         $scope.article = response.data;
-        console.log(response.data.images);
-        
         $scope.interval = constant.interval;
         $scope.active = 0;
         var slides = $scope.slides = [];
@@ -36,7 +34,7 @@ articleControllers.controller('ArticleShowController',
 );
 
 articleControllers.controller('ArticleCreateController', 
-  function ($scope, $stateParams, CategoryDetail, City, Article, FileUploader, commonLanguage, ResponseStatusHandleService) {
+  function ($timeout, $scope, $stateParams, CategoryDetail, City, Article, commonLanguage, ResponseStatusHandleService, uiUploader) {
       $scope.init = function () {
         // set language
         $scope.labelBuy = commonLanguage.common.labelBuy;
@@ -65,38 +63,46 @@ articleControllers.controller('ArticleCreateController',
         $scope.labelCreateArticle = commonLanguage.successLanguage.labelCreateArticle;
         $scope.data = {
           'type' : 'sell',
+          'city_id' : '',
+          'category_detail_id' : '',
         };
-        $scope.success = false;
         City.query().then(function (response){
           $scope.cities = response.data;
-          $scope.data.city_id = $scope.cities[0];
+          $scope.data.city_id = $scope.cities[0].id;
         }, function (response) {
           ResponseStatusHandleService.process(response.status);
         });
         
         CategoryDetail.query().then(function (response){
           $scope.categoryDetails = response.data;
-          $scope.data.category_detail_id = $scope.categoryDetails[0];
+          $scope.data.category_detail_id = $scope.categoryDetails[0].id;
         }, function (response) {
           ResponseStatusHandleService.process(response.status);
         });
       };
     
+      $scope.btn_remove = function(file) {
+          uiUploader.removeFile(file);
+      };
+      $scope.btn_clean = function() {
+          uiUploader.removeAll();
+      };
+      $scope.files = [];
+      var element = document.getElementById('createArticleFiles');
+      element.addEventListener('change', function(e) {
+          var files = e.target.files;
+          uiUploader.addFiles(files);
+          $scope.files = uiUploader.getFiles();
+          $scope.$apply();
+      });
     
-    var uploader = $scope.uploader = new FileUploader();
     
     $scope.submit = function (isValid) {
       if (isValid) {
-        var files = [];
-        angular.forEach($scope.uploader.queue, function (item) {
-          files.push(item._file);
-        });
-        $scope.data.category_detail_id = $scope.data.category_detail_id.id;
-        $scope.data.city_id = $scope.data.city_id.id;
-        Article.store(files, $scope.data).then(function (response){
-          $scope.success = true;
+        Article.store(uiUploader.getFiles(), $scope.data).then(function (response){
+          
         }, function (response) {
-          $scope.success = false;
+          $scope.errors = response.data.meta.message;
         });
       }
     }

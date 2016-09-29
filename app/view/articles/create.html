@@ -1,8 +1,14 @@
 <div class="container content-background well">
   <div class="row" id="articleShowContentBox">
-    <div class="alert alert-success" ng-show="success">
-      <a href data-target="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      {{ labelCreateArticle }}
+    <div class="alert alert-danger" ng-show="errors">
+      <a data-target="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <ul class="list-group">
+        <div ng-repeat="error in errors">
+          <li ng-repeat="e in error">
+            {{e}}
+          </li>
+        </div>
+      </ul>
     </div>
     <form name="createArticleForm" class="form-horizontal form-label-left" novalidate multipart/form-data>
       <div class="form-group margin-bottom-5">
@@ -41,7 +47,7 @@
       <div class="form-group" ng-class="{ 'has-error' : createArticleForm.category_detail_id.$invalid && !createArticleForm.category_detail_id.$pristine }">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelCategory}} <span class="required">*</span></label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-          <select class="form-control" ng-model="data.category_detail_id" name="category_detail_id" ng-options="categoryDetail.name group by categoryDetail.category.name for categoryDetail in categoryDetails track by categoryDetail.id" required>
+          <select class="form-control" ng-model="data.category_detail_id" name="category_detail_id" ng-options="categoryDetail.id as categoryDetail.name group by categoryDetail.category.name for categoryDetail in categoryDetails" required>
           </select>
           <span ng-show="createArticleForm.category_detail_id.$dirty && createArticleForm.category_detail_id.$error.required" class="help-block">{{labelCategory}} {{required}}</span>
         </div>
@@ -49,7 +55,7 @@
       <div class="form-group" ng-class="{ 'has-error' : createArticleForm.city_id.$invalid && !createArticleForm.city_id.$pristine }">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelCity}} <span class="required">*</span></label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-          <select class="form-control" name="city_id" ng-model="data.city_id" ng-options="city.name for city in cities track by city.id" ng-required="true">
+          <select class="form-control" name="city_id" ng-model="data.city_id" ng-options="city.id as city.name for city in cities" ng-required="true">
           </select>
           <span ng-show="createArticleForm.city_id.$dirty && createArticleForm.city_id.$error.required" class="help-block">{{labelCity}} {{required}}</span>
         </div>
@@ -69,55 +75,56 @@
         <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelTitle}} <span class="required">*</span>
         </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
-          <input ng-model="data.title" name="title" class="date-picker form-control col-md-7 col-xs-12" ng-required="true" type="text" ng-minlength="3" ng-maxlength="256">
+          <input ng-model="data.title" name="title" class="form-control col-md-7 col-xs-12" ng-required="true" type="text" ng-minlength="3" ng-maxlength="2560">
           <span class="help-block" ng-show="createArticleForm.title.$dirty && createArticleForm.title.$error.required">{{labelTitle}} {{required}}</span>
           <span class="help-block" ng-show="createArticleForm.title.$error.minlength">{{labelTitle}} {{minLength}}</span>
           <span class="help-block" ng-show="createArticleForm.title.$error.maxlength">{{labelTitle}} {{maxLength}}</span>
         </div>
       </div>
       <div class="form-group" ng-class="{ 'has-error' : createArticleForm.description.$invalid && !createArticleForm.description.$pristine }">
-          <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelDescription}} <span class="required">*</span>
-          </label>
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <textarea ng-model="data.description" name="description" class="form-control" rows="3" ng-minlength="3" ng-maxlength="2000" ng-required="true"></textarea>
-            <span class="help-block" ng-show="createArticleForm.description.$dirty  && createArticleForm.description.$error.required">{{labelDescription}} {{required}}</span>
-            <span class="help-block" ng-show="createArticleForm.description.$error.minlength">
-              {{labelDescription}} {{minLength}}
-            </span>
-            <span ng-show="createArticleForm.description.$error.maxlength" class="help-block">{{labelDescription}} {{maxLength}}</span>
-          </div>
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+          {{labelDescription}} <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <textarea ng-model="data.description" name="description" class="form-control" rows="3" ng-minlength="3" ng-maxlength="2000" ng-required="true"></textarea>
+          <span class="help-block" ng-show="createArticleForm.description.$dirty  && createArticleForm.description.$error.required">{{labelDescription}} {{required}}</span>
+          <span class="help-block" ng-show="createArticleForm.description.$error.minlength">
+            {{labelDescription}} {{minLength}}
+          </span>
+          <span ng-show="createArticleForm.description.$error.maxlength" class="help-block">{{labelDescription}} {{maxLength}}</span>
+        </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" ng-show="data.type=='sell'">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelPrice}} :
         </label>
         <div class="col-md-6 col-sm-6 col-xs-12">
           <input ng-model="data.price" name="price" class="date-picker form-control col-md-7 col-xs-12" numbers-only type="text">
         </div>
       </div>
-      <div class="form-group" ng-class="{ 'has-error' : createArticleForm.files.$invalid && !createArticleForm.files.$pristine }">
+      <div id="articleCreateFilesBox" class="form-group" ng-class="{ 'has-error' : createArticleForm.files.$invalid && !createArticleForm.files.$pristine }">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelImages}} <span class="required">*</span></label>
-        <div class="col-md-6 col-sm-6 col-xs-12 well articleCreateImageBox">
-          <input type="file" valid-file name="files" ng-model="files" nv-file-select uploader="uploader" ng-required="true" multiple/>
-          <span class="help-block" ng-show="createArticleForm.files.$dirty  && createArticleForm.files.$error.required">{{labelImages}} {{required}}</span>
-          <span>{{ labelTotalFiles }}: {{ uploader.queue.length }}</span>
-          <br/>
-          <div ng-repeat="item in uploader.queue">
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <div class="thumbnail">
-                <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, width: 100, height: 100 }" class="center thumbnail"></div>
-                <div class="caption">
-                  <h5 class="pull-right">
-            				<a class="btn btn-danger btn-xs" ng-click="item.remove()">
-            					<span class="glyphicon glyphicon-trash"></span>
-            				</a>
-            			</h5>
-                  <h5>
-                    <div ng-show="uploader.isHTML5" nowrap>{{ item.file.size/MB/MB|number:2 }} {{ labelData }}</div>
-            			</h5>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="well">
+              <div class="row">
+                <input type="file" id="createArticleFiles" name="files" ng-model="files" ng-required="true" accept="image/*" multiple class="col-md-7 col-sm-10 col-xs-10"/>
+                <div class="float-right" ng-show="files.length > 1">
+                    <a ng-click="btn_clean()" class="btn btn-danger"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
                 </div>
               </div>
-            </div>
+              <div ng-repeat="file in files" class="row createArticleFilesPreview">
+                <div>
+                  <span>{{file.name}}</span>
+                  <div class="float-right">
+                    <span>{{file.humanSize}}</span>
+                    <a ng-click="btn_remove(file)" title="Remove from list to be uploaded">
+                      <i class="fa fa-minus-square fa-3x" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+                <progress value="{{file.loaded}}" max="{{file.size}}"></progress>
+              </div>
           </div>
+        
         </div>
       </div>
       <div class="ln_solid"></div>

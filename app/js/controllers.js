@@ -38,7 +38,7 @@ bookControllers.controller('ViewController',
 );
 
 bookControllers.controller('HomeController', function (
-  $rootScope, $scope, Article, commonLanguage, constant) {
+  $rootScope, $scope, Article, commonLanguage, constant, ResponseStatusHandleService) {
     
     $scope.init = function () {
       // set language
@@ -48,14 +48,14 @@ bookControllers.controller('HomeController', function (
       // process logic
       
       Article.query().then(function (response){
-        $scope.articles = response.data;
+        $scope.articles = response.data.articles;
         $scope.viewby = constant.maxSelectedPagination;
         $scope.totalItems = $scope.articles.length;
         $scope.currentPage = constant.defaultCurrentPage;
         $scope.itemsPerPage = $scope.viewby;
         $scope.maxSize = constant.maxSizePagination;
       }, function (response) {
-        $scope.labelError = commonLanguage.common.labelError;
+        ResponseStatusHandleService.process(response.status);
       });
     };
     $scope.init();
