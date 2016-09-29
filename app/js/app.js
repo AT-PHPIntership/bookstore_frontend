@@ -8,9 +8,13 @@ var bookApp = angular.module('bookApp', [
   'satellizer',
   'ui.router',
   'ngCookies',
+  // time ago
   'yaru22.angular-timeago',
-  'angularFileUpload',
+  // ui bootstrap
   'ui.bootstrap',
+  // ui uploader
+  'ui.uploader',
+  // animate
   'ngAnimate',
   'ngSanitize',
 ]);

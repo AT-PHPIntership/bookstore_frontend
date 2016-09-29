@@ -58,7 +58,6 @@ shareServices.factory('Article', function($http, $rootScope, constant) {
         }).success(function(response) {
 
         }).error(function(response) {
-            console.log(response);
         });
     };
     return article;
@@ -135,7 +134,7 @@ shareServices.factory('ResponseStatusHandleService', function($state, constant) 
     responseStatusHandleService.process = function(status) {
         switch (status) {
             case constant.error500:
-                $state.go('404');
+                $state.go('500');
                 break;
             case constant.error400:
             case constant.error422:

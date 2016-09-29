@@ -10,7 +10,7 @@ input[type=radio].radioButtonCreateArticle {
     padding: 0;
     border: 0;
 }
-input[type=radio].radioButtonCreateArticle+ label.radioLabelCreateArticle {
+input[type=radio].radioButtonCreateArticle + label.radioLabelCreateArticle {
     padding-left: 23px;
     height: 18px;
     display: inline-block;
@@ -21,7 +21,7 @@ input[type=radio].radioButtonCreateArticle+ label.radioLabelCreateArticle {
     vertical-align: middle;
     cursor: pointer;
 }
-input[type=radio].radioButtonCreateArticle:checked+ label.radioLabelCreateArticle {
+input[type=radio].radioButtonCreateArticle:checked + label.radioLabelCreateArticle {
     background-position: 0 -18px;
 }
 .radioLabelCreateArticle {
@@ -37,11 +37,29 @@ label.radioLabelCreateArticle {
     user-select: none;
 }
 
-.articleCreateImageBox {
-  height: 300px;
+#articleCreateFilesBox .well{
+  height: 200px;
   overflow: scroll;
 }
 
-.articleCreateImageBox .caption {
-  height: 50px;
+#articleCreateFilesBox .content {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.createArticleFilesPreview {
+  margin-top: 20px;
+  border-bottom-color: antiquewhite;
+  border-bottom-style: double;
+}
+
+#createArticleFiles {
+  font-size: 16px;
+  padding-top: 10px;
 }
