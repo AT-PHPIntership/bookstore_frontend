@@ -2,7 +2,7 @@
 var articleControllers = angular.module('articleControllers', []);
 
 articleControllers.controller('ArticleShowController', 
-  function ($scope, $stateParams, Article, commonLanguage, $location, constant, ResponseStatusHandleService) {
+  function ($scope, $stateParams, Article, commonLanguage, $location, constant, ResponseStatusHandleService, NgMap) {
     $scope.init = function () {
       // set language
       $scope.labelLeaveAComment = commonLanguage.common.labelLeaveAComment;
@@ -13,7 +13,7 @@ articleControllers.controller('ArticleShowController',
       $scope.nextButton = commonLanguage.showArticleLanguage.nextButton;
       
       Article.get($stateParams.slug).then(function (response){
-        $scope.article = response.data;
+        $scope.article = response.data.article;
         $scope.interval = constant.interval;
         $scope.active = 0;
         var slides = $scope.slides = [];
@@ -26,7 +26,6 @@ articleControllers.controller('ArticleShowController',
       }, function (response) {
         ResponseStatusHandleService.process(response.status);
       });
-      
     };
     $scope.init();
 
