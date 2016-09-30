@@ -33,13 +33,6 @@
           <input ng-model="globals.currentUser.profile.phone" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" disabled>
         </div>
       </div>
-      <div class="form-group">
-        <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelAddress}} :
-        </label>
-        <div class="col-md-6 col-sm-6 col-xs-12">
-          <input ng-model="globals.currentUser.profile.address" class="form-control col-md-7 col-xs-12" type="text" disabled>
-        </div>
-      </div>
       <div class="form-group margin-bottom-5">
         <label class="col-md-3 col-sm-3 col-xs-12">{{labelContentArticle}}</label>
       </div>
@@ -58,6 +51,15 @@
           <select class="form-control" name="city_id" ng-model="data.city_id" ng-options="city.id as city.name for city in cities" ng-required="true">
           </select>
           <span ng-show="createArticleForm.city_id.$dirty && createArticleForm.city_id.$error.required" class="help-block">{{labelCity}} {{required}}</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">{{labelAddress}} :
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <input ng-model="data.address" class="form-control col-md-7 col-xs-12" type="text">
+          <input type="text" ng-model="data.lat" hidden/>
+          <input type="text" ng-model="data.lng" hidden/>
         </div>
       </div>
       <div class="form-group">

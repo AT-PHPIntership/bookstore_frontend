@@ -33,7 +33,7 @@ articleControllers.controller('ArticleShowController',
 );
 
 articleControllers.controller('ArticleCreateController', 
-  function ($timeout, $scope, $stateParams, CategoryDetail, City, Article, commonLanguage, ResponseStatusHandleService, uiUploader) {
+  function ($rootScope, $scope, $stateParams, CategoryDetail, City, Article, commonLanguage, ResponseStatusHandleService, uiUploader) {
       $scope.init = function () {
         // set language
         $scope.labelBuy = commonLanguage.common.labelBuy;
@@ -64,6 +64,7 @@ articleControllers.controller('ArticleCreateController',
           'type' : 'sell',
           'city_id' : '',
           'category_detail_id' : '',
+          'address' : $rootScope.globals.currentUser.profile.address,
         };
         City.query().then(function (response){
           $scope.cities = response.data;
@@ -78,6 +79,22 @@ articleControllers.controller('ArticleCreateController',
         }, function (response) {
           ResponseStatusHandleService.process(response.status);
         });
+        
+        
+        var geocoder= new google.maps.Geocoder();
+        $scope.$watch('data.address', function(newValue, oldValue) {
+          if (geocoder) {
+            geocoder.geocode({
+              'address': $scope.data.address
+            }, function (results, status) {
+              if (status == google.maps.GeocoderStatus.OK) {
+                $scope.data.lat = results[0].geometry.location.lat();
+                $scope.data.lng = results[0].geometry.location.lng();
+              }
+            });
+          }
+        });
+        
       };
     
       $scope.btn_remove = function(file) {

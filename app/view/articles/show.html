@@ -2,12 +2,12 @@
 	<div>
 		<div class="row">
 			<div class="col-md-4 col-sm-12 col-xs-12" id="showArticleMap">
-				<ng-map zoom="14" center="{{article.lat}}, {{article.long}}" >
+				<ng-map zoom="14" center="{{article.lat}}, {{article.lng}}" >
 	        <directions
 	          draggable="true"
 	          travel-mode="DRIVING"
 	          origin="current-location"
-	          destination="{{article.lat}}, {{article.long}}">
+	          destination="{{article.lat}}, {{article.lng}}">
 	        </directions>
 	      </ng-map>
       </div>
