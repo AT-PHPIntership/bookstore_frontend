@@ -17,6 +17,8 @@ var bookApp = angular.module('bookApp', [
   // animate
   'ngAnimate',
   'ngSanitize',
+  // map
+  'ngMap',
 ]);
 bookApp.config(['$stateProvider', '$urlRouterProvider', '$authProvider', '$httpProvider', 
   function ($stateProvider, $urlRouterProvider, $authProvider, $httpProvider) {
@@ -65,7 +67,8 @@ bookApp.config(['$stateProvider', '$urlRouterProvider', '$authProvider', '$httpP
           url: '/error/500',
           templateUrl: 'view/errors/500.html',
           controller: 'ServerErrorController'
-      });
+      }
+    );
     $urlRouterProvider.otherwise('/login');
   }
 ]);
