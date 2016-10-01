@@ -63,3 +63,7 @@ label.radioLabelCreateArticle {
   font-size: 16px;
   padding-top: 10px;
 }
+
+#createArticleMapBox {
+  padding-bottom: 30px;
+}

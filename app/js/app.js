@@ -117,4 +117,5 @@ bookApp.constant("constant", {
   'maxSizePagination': 5,
   'maxSelectedPagination': 4,
   'interval': 2000,
+  'mapType' : 'geocode',
 });
