@@ -12,11 +12,11 @@ var bookApp = angular.module('bookApp', [
   'yaru22.angular-timeago',
   // ui bootstrap
   'ui.bootstrap',
+  'ngSanitize',
   // ui uploader
   'ui.uploader',
   // animate
   'ngAnimate',
-  'ngSanitize',
   // map
   'ngMap',
 ]);
@@ -67,8 +67,13 @@ bookApp.config(['$stateProvider', '$urlRouterProvider', '$authProvider', '$httpP
           url: '/error/500',
           templateUrl: 'view/errors/500.html',
           controller: 'ServerErrorController'
-      }
-    );
+      })
+      .state('ads', {
+          url: '/users/ads',
+          templateUrl: 'view/users/ads.html',
+          controller: 'AdsController'
+      })
+      ;
     $urlRouterProvider.otherwise('/login');
   }
 ]);

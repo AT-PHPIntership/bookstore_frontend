@@ -88,7 +88,6 @@ articleControllers.controller('ArticleCreateController',
       // set map
       $scope.types = [constant.mapType];
       $scope.placeChanged = function() {
-        console.log(this);
         $scope.place = this.getPlace();
         $scope.map.setCenter($scope.place.geometry.location);
         $scope.data.lat = $scope.place.geometry.location.lat();

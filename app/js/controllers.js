@@ -4,6 +4,7 @@ var bookControllers = angular.module('bookControllers', [
   'articleControllers',
   'categoryControllers',
   'errorControllers',
+  'userControllers',
 ]);
 
 bookControllers.controller('ViewController', 

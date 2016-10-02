@@ -114,7 +114,7 @@
             name="description" class="form-control"
             rows="3"
             ng-minlength="3" ng-maxlength="2000" ng-required="true"
-            placeholder="placeHolderDescription"
+            placeholder="{{placeHolderDescription}}"
           ></textarea>
           <span class="help-block" ng-show="createArticleForm.description.$dirty  && createArticleForm.description.$error.required">{{labelDescription}} {{required}}</span>
           <span class="help-block" ng-show="createArticleForm.description.$error.minlength">
